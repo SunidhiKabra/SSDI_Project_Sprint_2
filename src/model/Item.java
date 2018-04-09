@@ -8,6 +8,8 @@ public class Item implements IItem{
 	private String name;
 	private String description;
 	private float rent;
+	private boolean status;
+
 	
 	public Item()
 	{
@@ -16,15 +18,18 @@ public class Item implements IItem{
 		name = null;
 		description = null;
 		rent = 0.0f;
+		status = true;
+
 	}
 	
-	public Item(int id, int customerId, String name, String desc, float rent)
+	public Item(int id, int customerId, String name, String desc, float rent, boolean status)
 	{
 		this.id = id;
 		this.customerId = customerId;
 		this.name = name;
 		this.description = desc;
 		this.rent = rent;
+		this.status = status;
 	}
 	
 	public Item(int id, int customerId, String name, float rent)
@@ -43,8 +48,18 @@ public class Item implements IItem{
 	}
 
 	@Override
+	public void setId(int id) {
+		this.id = id;
+		
+	}
+
+	@Override
+	public int getId() {
+		return this.id;
+	}
+	
+	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 
@@ -56,7 +71,6 @@ public class Item implements IItem{
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return description;
 	}
 
@@ -86,5 +100,18 @@ public class Item implements IItem{
 	public int getCustomerId() {
 		return this.customerId;
 	}
+
+	@Override
+	public void setAvailability(boolean status) {
+		this.status = status;
+		
+	}
+
+	@Override
+	public boolean getAvailability() {
+		// TODO Auto-generated method stub
+		return this.status;
+	}
+
 
 }

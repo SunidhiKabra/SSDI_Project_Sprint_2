@@ -2,6 +2,9 @@
 package model;
 
 public interface IItem {
+	public void setId(int id);
+	public int getId();
+	
 	public void setName(String name);
 	public String getName();
 	
@@ -13,4 +16,8 @@ public interface IItem {
 	
 	public void setCustomerId(int customerId);
 	public int getCustomerId();
+	
+	public void setAvailability(boolean status);
+	public boolean getAvailability();
+
 }

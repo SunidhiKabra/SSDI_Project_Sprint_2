@@ -5,38 +5,52 @@
 
 <hr />
 <br />
-<p>
-<!--  <table border="1">-->
-<table class="table table-bordered table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th>Item</th>
-        <th>Description</th>
-        <th>Rent</th>
-        <th>Owner Details</th>
-      </tr>
-    </thead>
-    <tbody>
-	<c:forEach var="item" items="${items}">
 
-		<tr>
-			<td valign="top">${item.getName()}</td>
-		
-			<td valign="top">${item.getDescription()}</td>
 
-			<td valign="top">${item.getRent()}</td>
-			
-			<td> <a href = "viewRenter.do?customerId=${item.getCustomerId()}" class="btn btn-outline-info" role="button">Contact Renter
-		<!--  	<button type="button" class="btn btn-info">
-				Contact Renter
-			</button>  -->
- 		</a> </td>
-		</tr>
 
-	</c:forEach>
-	</tbody>
-  </table>
+<!-- <div class="container">
+	<div class="row bg-black">
 
-</p>
+		<div class="col-sm-2">Item</div>
+		<div class="col-sm-5">Description</div>
+		<div class="col-sm-2">Rent</div>
+		<div class="col-sm-3">Owner Details</div>
+
+
+	</div>
+</div>
+ -->
+<div class="container">
+	
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Item</th>
+					<th>Description</th>
+					<th>Rent</th>
+					<th>Owner Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="item" items="${items}">
+					
+					<tr>
+
+						<td valign="middle" >${item.getName()}</td>
+
+						<td valign="middle" >${item.getDescription()}</td>
+
+						<td valign="middle">${item.getRent()}</td>
+
+						<td valign="middle"><a
+							href="viewRenter.do?customerId=${item.getCustomerId()}"
+							class="btn btn-outline-info" role="button">Contact Renter </a></td>
+					</tr>
+					
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+
 
 <jsp:include page="footer.jsp" />
