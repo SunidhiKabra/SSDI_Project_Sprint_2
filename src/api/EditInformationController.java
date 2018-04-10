@@ -47,7 +47,7 @@ private CustomerDao customerDao;
 	}
 		
 	
-		private List<String> getValidationErrors(HttpServletRequest request, Customer loggedInUser){
+		public List<String> getValidationErrors(HttpServletRequest request, Customer loggedInUser){
 			
 			List<String> errors = new ArrayList<String>();
 			String firstName = request.getParameter("firstName");

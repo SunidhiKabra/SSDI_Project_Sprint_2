@@ -12,7 +12,15 @@ public class Customer implements ICustomer{
 		this.password = null;
 		this.phoneNumber = null;
 	}
-	
+	//for testing purposes only
+	public Customer(String firstName, String lastName, String email, String password, String phoneNumber) {
+		this.id = -1;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+	}
 	public Customer(int id, String firstName, String lastName, String email, String password, String phoneNumber) {
 		this.id = id;
 		this.firstName = firstName;

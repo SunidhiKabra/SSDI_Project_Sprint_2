@@ -47,7 +47,7 @@ public class AddItemController extends Action {
 		return "addItems.jsp";
 	}
 
-	private List<String> getValidationErrors(HttpServletRequest request) {
+	public List<String> getValidationErrors(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");

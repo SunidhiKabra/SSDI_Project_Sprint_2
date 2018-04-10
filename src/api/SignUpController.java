@@ -48,7 +48,7 @@ public class SignUpController extends Action{
 }
 	
 	
-	private List<String> getValidationErrors(HttpServletRequest request){
+	public List<String> getValidationErrors(HttpServletRequest request){
 	
 		List<String> errors = new ArrayList<String>();
 		String firstName = request.getParameter("firstName");

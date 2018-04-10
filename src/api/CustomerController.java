@@ -35,7 +35,7 @@ public class CustomerController extends HttpServlet {
 		return customer_service.getCustomers();
 	}
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		Customer cust = new Customer();

@@ -21,7 +21,16 @@ public class Item implements IItem{
 		status = true;
 
 	}
-	
+	//for testing purposes only
+	public Item(int customerId, String name, String desc, float rent, boolean status)
+	{
+		this.id = -1;
+		this.customerId = customerId;
+		this.name = name;
+		this.description = desc;
+		this.rent = rent;
+		this.status = status;
+	}
 	public Item(int id, int customerId, String name, String desc, float rent, boolean status)
 	{
 		this.id = id;

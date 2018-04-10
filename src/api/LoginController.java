@@ -30,14 +30,6 @@ public class LoginController extends Action{
 	public String perform(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		List<String> errors = new ArrayList<String>();
-
-//		String email = request.getParameter("email");
-//		String password = request.getParameter("password");
-//		try {
-//			email = request.getParameter("email");
-//			password = request.getParameter("password");
-//		}catch(NullPointerException e)
-
 		
 		String email = null;
 		String password = null;
@@ -45,29 +37,24 @@ public class LoginController extends Action{
 			email = request.getParameter("email");
 			password = request.getParameter("password");
 		}
-		catch(NullPointerException e)
-
-		{
+		catch(NullPointerException e) {
 			e.printStackTrace();
 			email = null;
 			password = null;
 		}
 		
-		if(email == null && password == null)
-		{
+		if(email == null && password == null) {
 			return "login.jsp";
 		}	
 		
 		HttpSession session = request.getSession();
 		ICustomer loggedInUser = customerDao.getCustomer(email);
-		if(loggedInUser == null)
-		{	
+		if(loggedInUser == null) {	
 			errors.add("No Such User Exists.");
 			request.setAttribute("errors", errors);
 			return "login.jsp";
 		}
-		else if(! password.equals(loggedInUser.getPassword()))
-		{
+		else if(! password.equals(loggedInUser.getPassword())) {
 			errors.add("Incorrect Password.");
 			request.setAttribute("errors", errors);
 			return "login.jsp";
@@ -75,10 +62,6 @@ public class LoginController extends Action{
 		else {
 			session.setAttribute("loggedInUser",loggedInUser);
 			return "homePage.do";
-		}
-		
+		}	
 	}
-	
-	
-
 }

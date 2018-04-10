@@ -15,7 +15,12 @@ public class ItemService implements IItemService{
 
 	@Override
 	public void addItem(Item item) {
-		item_dao.addItem(item);
+		try {
+			item_dao.addItem(item);
+		}
+		catch (NullPointerException e) {
+			
+		}
 		
 	}
 

@@ -17,8 +17,12 @@ public class CustomerService implements ICustomerService{
 
 	@Override
 	public void addCustomer(Customer customer) {
-		customer_dao.addCustomer(customer);
-		
+		try {
+			customer_dao.addCustomer(customer);
+		}
+		catch(NullPointerException e) {
+			
+		}
 	}
 
 	@Override
