@@ -113,4 +113,68 @@ public class TestCustomerDao {
 			assertFalse(true);
 		}
 	}
+	
+	@Test
+	public void editCustomer() {
+		ResultSet rs = null;
+		PreparedStatement p = null;
+		String sql=null;
+		try {
+			Customer testCust = new Customer("roro","kapo","rkap@uncc.edu","pass123","1237");
+			cdTest.addCustomer(testCust);
+			
+			sql="SELECT * FROM Customer";
+			p = c.prepareStatement(sql);
+			rs = p.executeQuery();
+			rs.next();
+			
+			int id = rs.getInt("id");
+			testCust.setID(id);
+			testCust.setFirstName("newFirst");
+			testCust.setLastName("newLast");
+			testCust.setEmail("newEmail");
+			Customer editCust = new Customer(testCust.getID(), testCust.getFirstName(), testCust.getLastName(), testCust.getEmail(), testCust.getPassword(), testCust.getPhoneNumber());
+			cdTest.setCustomer(editCust);
+			
+			sql="SELECT * FROM Customer";
+			p = c.prepareStatement(sql);
+			rs = p.executeQuery();
+			
+			assertEquals(true, rs.next());
+			assertEquals("newFirst", rs.getString("firstName"));
+			assertEquals("newLast", rs.getString("lastName"));
+			assertEquals("newEmail", rs.getString("emailID"));
+			assertEquals("pass123", rs.getString("password"));
+			assertEquals("1237", rs.getString("phoneNumber"));
+		}
+		catch (SQLException e) {
+			assertFalse(true);
+		}
+		
+		PreparedStatement p2 = null;
+		String sql2 = null;
+		ConnectionData connData = new ConnectionData();
+		Connection conn = ConnectionUtility.getConnection(connData);
+		try {
+			sql2 = "delete from Customer where emailID = ?";
+			p2 = conn.prepareStatement(sql2);
+			p2.setString(1, "rkap@uncc.edu");
+			p2.executeUpdate();
+		}
+		catch (SQLException e) {
+			assertFalse(true);
+		}
+		PreparedStatement p3 = null;
+		String sql3 = null;
+		
+		try {
+			sql3 = "delete from Customer where emailID = ?";
+			p3 = conn.prepareStatement(sql2);
+			p3.setString(1, "newEmail");
+			p3.executeUpdate();
+		}
+		catch (SQLException e) {
+			assertFalse(true);
+		}
+	}
 }

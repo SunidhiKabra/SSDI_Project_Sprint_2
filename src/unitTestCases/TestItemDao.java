@@ -18,6 +18,7 @@ import org.mockito.Mock;
 import java.util.List;
 import dao.CustomerDao;
 import dao.ItemDao;
+import model.Customer;
 import model.IItem;
 import model.Item;
 import utilities.ConnectionData;
@@ -126,15 +127,66 @@ public class TestItemDao {
 		catch (SQLException e) {
 			assertFalse(true);
 		}
-		/*
+	}
+	@Test
+	public void showCustomerItems() {
+		Item testItem = new Item(6, "phone", "apple", (float) 80.00, true);
+		Item testItem2 = new Item(6, "laptop", "apple", (float) 80.00, true);
+		idTest.addItem(testItem);
+		idTest.addItem(testItem2);
+		
+		List<IItem> items = idTest.getItemsByOwner(6);
+		
+		assertEquals(2, items.size());
+		assertEquals("phone", items.get(0).getName());
+		assertEquals("laptop", items.get(1).getName());
+	}
+	
+	@Test
+	public void editItem() {
+		ResultSet rs = null;
+		PreparedStatement p = null;
+		String sql=null;
 		try {
-			sql2 = "delete from Item where customerId = ?";
+			Item testCust = new Item(6, "phone","samsung",(float) 45.05, true);
+			idTest.addItem(testCust);
+			
+			sql="SELECT * FROM Item";
+			p = c.prepareStatement(sql);
+			rs = p.executeQuery();
+			rs.next();
+			
+			int id = rs.getInt("id");
+			testCust.setId(id);
+			testCust.setName("iPhone");
+			//Item editCust = new Item(testCust.getId(), testCust.getCustomerId(), testCust.getName(), testCust.getDescription(), testCust.getRent(), testCust.getAvailability());
+			idTest.updateItemById(id, false);
+			
+			sql="SELECT * FROM Item";
+			p = c.prepareStatement(sql);
+			rs = p.executeQuery();
+			
+			assertEquals(true, rs.next());
+			assertEquals(false, rs.getBoolean("isAvailable"));
+		}
+		catch (SQLException e) {
+			assertFalse(true);
+		}
+		
+		PreparedStatement p2 = null;
+		String sql2 = null;
+		ConnectionData connData = new ConnectionData();
+		Connection conn = ConnectionUtility.getConnection(connData);
+		try {
+			sql2 = "delete from Item where customerID = ?";
 			p2 = conn.prepareStatement(sql2);
-			p2.setInt(1, -1);
+			p2.setString(1, "6");
 			p2.executeUpdate();
 		}
 		catch (SQLException e) {
 			assertFalse(true);
-		}*/
+		}
+		
 	}
 }
+
