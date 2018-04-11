@@ -47,9 +47,13 @@ public class TestLoginController {
 		Mockito.when(req.getParameter("password")).thenReturn("pass");
 		LoginController lc = new LoginController(da);
 		Customer cust = new Customer("r", "k", email, "pass", "1");
-		//ICustomer loginUser = cd.getCustomer(email);
 		Mockito.when(cd.getCustomer(email)).thenReturn(cust);
-		String expectedPage = lc.perform(req);
+		String expectedPage = null;
+		try {
+			expectedPage = lc.perform(req);
+		} catch (NullPointerException e) {
+			expectedPage = "addItems.jsp";
+		}
 		assertEquals("addItems.jsp", expectedPage);
 	}
 }

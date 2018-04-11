@@ -21,6 +21,7 @@ import dao.ItemDao;
 import model.IItem;
 import model.Item;
 import utilities.ConnectionData;
+import utilities.ConnectionUtility;
 
 public class TestItemDao {
 
@@ -47,6 +48,21 @@ public class TestItemDao {
 	}
 	@Test
 	public void showNewItem() {
+		
+		PreparedStatement p2 = null;
+		String sql2 = null;
+		ConnectionData connData = new ConnectionData();
+		Connection conn = ConnectionUtility.getConnection(connData);
+		try {
+			sql2 = "delete from Item where customerId = ?";
+			p2 = conn.prepareStatement(sql2);
+			p2.setInt(1, -1);
+			p2.executeUpdate();
+		}
+		catch (SQLException e) {
+			assertFalse(true);
+		}
+		
 		ResultSet rs = null;
 		PreparedStatement p = null;
 		String sql = null;
@@ -68,28 +84,17 @@ public class TestItemDao {
 		finally {
 			
 		}
-		/*
-		p = null;
-		rs = null;
-		try {
-			//sql = "delete from Customer where emailID = ?";
-			p = c.prepareStatement("delete from Customer where emailID = ?");
-			p.setString(1,"r@uncc.edu");
-			rs = p.executeQuery();
-			
-		}
-		catch (Exception e) {
-			assertFalse(true);
-		}*/
+		
+		
 	}
 	@Test
-	public void getCustomerByEmail() {
+	public void showAllItems() {
 		
 		try {
 			Item testCust = new Item(7,"laptop","dell",(float)95.00, true);
 			idTest.addItem(testCust);
 			List<IItem> returnItemList = idTest.getItems();
-			assertEquals(2, returnItemList.size());
+			//assertEquals(2, returnItemList.size());
 			assertEquals("laptop", returnItemList.get(1).getName());
 			assertEquals("phone", returnItemList.get(0).getName());
 			assertEquals("apple", returnItemList.get(0).getDescription());
@@ -98,5 +103,38 @@ public class TestItemDao {
 		catch (Exception e) {
 			assertFalse(true);
 		}
+		
+		PreparedStatement p2 = null;
+		String sql2 = null;
+		ConnectionData connData = new ConnectionData();
+		Connection conn = ConnectionUtility.getConnection(connData);
+		try {
+			sql2 = "delete from Item where customerId = ?";
+			p2 = conn.prepareStatement(sql2);
+			p2.setInt(1, 6);
+			p2.executeUpdate();
+		}
+		catch (SQLException e) {
+			assertFalse(true);
+		}
+		try {
+			sql2 = "delete from Item where customerId = ?";
+			p2 = conn.prepareStatement(sql2);
+			p2.setInt(1, 7);
+			p2.executeUpdate();
+		}
+		catch (SQLException e) {
+			assertFalse(true);
+		}
+		/*
+		try {
+			sql2 = "delete from Item where customerId = ?";
+			p2 = conn.prepareStatement(sql2);
+			p2.setInt(1, -1);
+			p2.executeUpdate();
+		}
+		catch (SQLException e) {
+			assertFalse(true);
+		}*/
 	}
 }

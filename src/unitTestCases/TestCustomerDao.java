@@ -11,10 +11,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+
+import com.mysql.jdbc.Statement;
+
 import dao.CustomerDao;
 import model.Customer;
 import model.ICustomer;
 import utilities.ConnectionData;
+import utilities.ConnectionUtility;
 
 
 public class TestCustomerDao {
@@ -27,6 +31,8 @@ public class TestCustomerDao {
 	private PreparedStatement stmt;
 	@Mock
 	private CustomerDao cd;
+	//@Mock
+	//ConnectionData connData;
 	
 	private ConnectionData cdata = new ConnectionData();
 	private CustomerDao cdTest = new CustomerDao(cdata);
@@ -62,22 +68,19 @@ public class TestCustomerDao {
 		catch (SQLException e) {
 			assertFalse(true);
 		}
-		finally {
-			
-		}
-		/*
-		p = null;
-		rs = null;
+		PreparedStatement p2 = null;
+		String sql2 = null;
+		ConnectionData connData = new ConnectionData();
+		Connection conn = ConnectionUtility.getConnection(connData);
 		try {
-			//sql = "delete from Customer where emailID = ?";
-			p = c.prepareStatement("delete from Customer where emailID = ?");
-			p.setString(1,"r@uncc.edu");
-			rs = p.executeQuery();
-			
+			sql2 = "delete from Customer where emailID = ?";
+			p2 = conn.prepareStatement(sql2);
+			p2.setString(1, "r@uncc.edu");
+			p2.executeUpdate();
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			assertFalse(true);
-		}*/
+		}
 	}
 	@Test
 	public void getCustomerByEmail() {
@@ -94,6 +97,19 @@ public class TestCustomerDao {
 			
 		}
 		catch (Exception e) {
+			assertFalse(true);
+		}
+		PreparedStatement p2 = null;
+		String sql2 = null;
+		ConnectionData connData = new ConnectionData();
+		Connection conn = ConnectionUtility.getConnection(connData);
+		try {
+			sql2 = "delete from Customer where emailID = ?";
+			p2 = conn.prepareStatement(sql2);
+			p2.setString(1, "rk@uncc.edu");
+			p2.executeUpdate();
+		}
+		catch (SQLException e) {
 			assertFalse(true);
 		}
 	}

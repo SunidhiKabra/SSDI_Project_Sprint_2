@@ -1,9 +1,12 @@
 package unitTestCases;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
 import javax.servlet.ServletException;
@@ -22,6 +25,8 @@ import api.AddItemController;
 import api.CustomerController;
 import dao.DAO;
 import model.Customer;
+import utilities.ConnectionData;
+import utilities.ConnectionUtility;
 
 public class TestCustomerController {
 	@Mock
@@ -70,6 +75,22 @@ public class TestCustomerController {
 		assertEquals(e, cust.getEmail());
 		assertEquals(p, cust.getPassword());
 		assertEquals(ph, cust.getPhoneNumber());
+		
+		
+		PreparedStatement p2 = null;
+		String sql2 = null;
+		ConnectionData connData = new ConnectionData();
+		Connection conn = ConnectionUtility.getConnection(connData);
+		try {
+			sql2 = "delete from Customer where emailID = ?";
+			p2 = conn.prepareStatement(sql2);
+			p2.setString(1, "email");
+			p2.executeUpdate();
+		}
+		catch (SQLException ex) {
+			assertFalse(true);
+		}
+		
 	}
 	
 }
