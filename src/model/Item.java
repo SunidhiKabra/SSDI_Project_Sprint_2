@@ -9,6 +9,7 @@ public class Item implements IItem{
 	private String description;
 	private float rent;
 	private boolean status;
+	private String comment;
 
 	
 	public Item()
@@ -120,6 +121,17 @@ public class Item implements IItem{
 	public boolean getAvailability() {
 		// TODO Auto-generated method stub
 		return this.status;
+	}
+	@Override
+	public void setComment(String comment) {
+		// TODO Auto-generated method stub
+		this.comment= comment;
+		
+	}
+	@Override
+	public String getComment() {
+		// TODO Auto-generated method stub
+		return comment;
 	}
 
 

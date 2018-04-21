@@ -29,6 +29,7 @@
 					<th>Description</th>
 					<th>Rent</th>
 					<th>Owner Details</th>
+					<th>Comment</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,6 +46,16 @@
 						<td valign="middle"><a
 							href="viewRenter.do?customerId=${item.getCustomerId()}"
 							class="btn btn-outline-info" role="button">Contact Renter </a></td>
+							
+						<td valign="middle">${item.getComment()} ></td>	
+							
+						<td valign="middle">
+							<a href="addComment.do?itemId=${item.getItemId()}"
+								class="btn btn-outline-info" role="button">Add Comment
+							</a>
+						</td>
+						
+						
 					</tr>
 					
 				</c:forEach>

@@ -19,5 +19,8 @@ public interface IItem {
 	
 	public void setAvailability(boolean status);
 	public boolean getAvailability();
+	
+	public void setComment(String comment);
+	public String getComment();
 
 }

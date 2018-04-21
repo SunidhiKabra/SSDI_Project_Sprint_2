@@ -30,7 +30,7 @@ public class Controller extends HttpServlet {
 		Action.add(new ViewAccountInfoController(dao));
 		Action.add(new EditInformationController(dao));
 		Action.add(new SignUpController(dao));
-		// Action.add(new ViewItemController(dao));
+		Action.add(new AddCommentController(dao));
 		begin = false;
 	}
 

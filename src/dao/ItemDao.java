@@ -153,5 +153,59 @@ public class ItemDao implements IItemDao {
 			}
 		}
 	}
+	
+	public void addCommentForItemById(int id, String comment) {
+		Connection con = null;
+		try {
+			con = ConnectionUtility.getConnection(conn_data);
+			Statement stmt = con.createStatement();
+
+			PreparedStatement pstmt = con.prepareStatement("Update item set comment= ? where id = ?");
+
+			pstmt.setString(1, comment);
+			pstmt.setInt(2, id);
+			pstmt.executeUpdate();
+			stmt.close();
+
+		} catch (SQLException e) {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e2) {
+			}
+		}
+	}
+	
+	public Item getItemById(int id) {
+		Connection con = null;
+		Item item = new Item();
+		try {
+			con = ConnectionUtility.getConnection(conn_data);
+			Statement stmt = con.createStatement();
+
+			PreparedStatement pstmt = con.prepareStatement("select * from item where id = ? and isAvailable=1");
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				
+				item.setId(rs.getInt("id"));
+				item.setCustomerId(rs.getInt("customerID"));
+				item.setName(rs.getString("name"));
+				item.setDescription(rs.getString("description"));
+				item.setRent(rs.getFloat("rent"));
+				item.setComment(rs.getString("comment"));
+			}
+		stmt.close();
+
+		} catch (SQLException e) {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e2) {
+			}
+		}
+		return item;
+	}
 
 }
