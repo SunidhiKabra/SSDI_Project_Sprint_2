@@ -28,7 +28,7 @@ public class UpdatePostingsController extends Action{
 		int itemID =  Integer.parseInt(request.getParameter("itemId"));
 		boolean statusId = Boolean.parseBoolean(request.getParameter("statusId"));
 		itemDAO.updateItemById(itemID, statusId);
-		return "Item " +itemName + " updated successfully.msg" ;
+		return "Item " +itemName + " updated successfully.msg";
 	}
 
 }

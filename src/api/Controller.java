@@ -31,6 +31,8 @@ public class Controller extends HttpServlet {
 		Action.add(new EditInformationController(dao));
 		Action.add(new SignUpController(dao));
 		Action.add(new AddCommentController(dao));
+		Action.add(new AddItemToWishlistController(dao));
+		Action.add(new ViewWishlistController(dao));
 		begin = false;
 	}
 

@@ -46,7 +46,7 @@ public class ItemDao implements IItemDao {
 	}
 
 	@Override
-	public List<IItem> getItems() {
+	public List<IItem> getItems(int customerId) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		List<IItem> lstItems = null;
@@ -54,7 +54,9 @@ public class ItemDao implements IItemDao {
 			con = ConnectionUtility.getConnection(conn_data);
 
 			Statement stmt = con.createStatement();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM item where isAvailable = 1");
+		//	PreparedStatement pstmt = con.prepareStatement("SELECT * FROM item where isAvailable = 1");
+			PreparedStatement pstmt = con.prepareStatement("SELECT I.*, IFNULL(W.itemId, 0) AS IsWishListItem FROM item I left join Wishlist W ON I.id = W.itemId and W.customerId = ? where isAvailable = 1");
+			pstmt.setInt(1, customerId);
 			ResultSet rs = pstmt.executeQuery();
 			lstItems = new ArrayList<IItem>();
 			while (rs.next()) {
@@ -64,6 +66,8 @@ public class ItemDao implements IItemDao {
 				item.setName(rs.getString("name"));
 				item.setDescription(rs.getString("description"));
 				item.setRent(rs.getFloat("rent"));
+				item.setIsWishedItem((rs.getInt("IsWishListItem") != 0));
+				
 				lstItems.add(item);
 			}
 			stmt.close();

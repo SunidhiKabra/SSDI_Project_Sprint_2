@@ -1,8 +1,4 @@
-
 package api;
-
-import dao.*;
-import model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,18 +6,24 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class ViewItemController extends Action {
-	private ItemDao itemDAO;
+import dao.WishlistDao;
+import model.ICustomer;
+import model.IItem;
+import dao.DAO;
+
+public class ViewWishlistController extends Action
+{
+	private WishlistDao wishlistDao;
 	
-	public ViewItemController(DAO dao) {
-		itemDAO = dao.getItemDAO();
+	public ViewWishlistController(DAO dao)
+	{
+		wishlistDao = dao.getWishlistDAO();
 	}
-	
 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "viewItems.do";
+		return "viewWishlist.do";
 	}
 
 	@Override
@@ -30,10 +32,10 @@ public class ViewItemController extends Action {
 		List<String> errors = new ArrayList<String>();
 		HttpSession session = request.getSession(true);
 		ICustomer loggedInUser = (ICustomer) session.getAttribute("loggedInUser");
-		List<IItem> items = itemDAO.getItems(loggedInUser.getID());
+		List<IItem> items = wishlistDao.getItems(loggedInUser.getID());
 		request.setAttribute("errors", errors);
 		request.setAttribute("items", items);	
-		return "viewItems.jsp";
+		return "wishlist.jsp";
 	}
 
 }

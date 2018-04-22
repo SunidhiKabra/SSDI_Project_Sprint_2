@@ -60,6 +60,30 @@
 		});
 
 	}
+	
+	function AddToWishlist(itemId)
+	{
+		var element = document.getElementById("AddToWishlist" + itemId);
+		$.ajax({
+			type : "POST",
+			url : "addToWishList.do?itemId=" + itemId,
+
+			data : {
+				id : itemId
+			},
+		 success : function(result) {
+			 alert(result);
+			 /* var message = document.getElementById("successMessage");
+			 message.innerHTML = result; */
+			 element.disabled = true;
+		},
+		/*
+		error : function(result) {
+			alert(result);
+		} */
+
+		});
+	}
 </script>
 
 <style>
@@ -124,6 +148,11 @@ a {
 			<a href="myPostings.do">
 				<button>
 					<h4>My Postings</h4>
+				</button>
+			</a>	
+			<a href="viewWishlist.do">
+				<button>
+					<h4>My Wishlist</h4>
 				</button>
 			</a>	
 			<div style="float: right; padding-right:20px;">

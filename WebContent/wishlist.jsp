@@ -7,20 +7,6 @@
 <hr />
 <br />
 
-
-
-<!-- <div class="container">
-	<div class="row bg-black">
-
-		<div class="col-sm-2">Item</div>
-		<div class="col-sm-5">Description</div>
-		<div class="col-sm-2">Rent</div>
-		<div class="col-sm-3">Owner Details</div>
-
-
-	</div>
-</div>
- -->
 <div class="container">
 	
 		<table class="table table-bordered table-striped">
@@ -29,10 +15,10 @@
 					<th>Item</th>
 					<th>Description</th>
 					<th>Rent</th>
-					<th>Owner Details</th>
+					<th>Owner Details</th><!-- 
 					<th>Comment</th>
 					<th></th>
-					<th>Add to Wishlist</th>
+					<th>Add to Wishlist</th> -->
 				</tr>
 			</thead>
 			<tbody>
@@ -50,7 +36,7 @@
 							href="viewRenter.do?customerId=${item.getCustomerId()}"
 							class="btn btn-outline-info" role="button">Contact Renter </a></td>
 							
-						<td valign="middle">${item.getComment()} ></td>	
+						<%-- <td valign="middle">${item.getComment()} ></td>	
 							
 						<td valign="middle">
 							<a href="addComment.do?itemId=${item.getItemId()}"
@@ -78,15 +64,13 @@
 						 
 						
 						
-						<%-- <a
+						<a
 							href="addToWishList.do?itemId=${item.getItemId()}"
-							class="btn btn-outline-info" role="button">Add To Wishlist </a> --%>
-						 <%--  <input id = "AddToWishlist${item.getId()}" type="button" class="btn btn-outline-info" 
+							class="btn btn-outline-info" role="button">Add To Wishlist </a>
+						  <input id = "AddToWishlist${item.getId()}" type="button" class="btn btn-outline-info" 
 						 value="Add To Wishlist" 
 						  onclick="AddToWishlist(${item.getId()})"> --%>
-						 				
-								
-				
+						 			
 						
 						
 					</tr>

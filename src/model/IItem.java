@@ -22,5 +22,8 @@ public interface IItem {
 	
 	public void setComment(String comment);
 	public String getComment();
+	
+	public void setIsWishedItem(boolean isWishedItem);
+	public boolean isWishedItem();
 
 }

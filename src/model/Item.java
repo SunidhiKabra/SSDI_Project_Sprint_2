@@ -10,6 +10,7 @@ public class Item implements IItem{
 	private float rent;
 	private boolean status;
 	private String comment;
+	private boolean isWishedItem;
 
 	
 	public Item()
@@ -133,6 +134,18 @@ public class Item implements IItem{
 		// TODO Auto-generated method stub
 		return comment;
 	}
-
+	@Override
+	public boolean isWishedItem() {
+		// TODO Auto-generated method stub
+		return this.isWishedItem;
+	}
+	@Override
+	public void setIsWishedItem(boolean isWishedItem) {
+		this.isWishedItem = isWishedItem;
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 }
